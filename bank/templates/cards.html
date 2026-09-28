@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Cards</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #0f172a;
+            color: white;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1000px;
+            margin: 50px auto;
+        }
+
+        .top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            margin: 0;
+        }
+
+        .add {
+            text-decoration: none;
+            color: white;
+            background: #2563eb;
+            padding: 12px 20px;
+            border-radius: 10px;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: #1e293b;
+            padding: 25px;
+            border-radius: 20px;
+        }
+
+        .card-number {
+            font-size: 22px;
+            letter-spacing: 2px;
+            margin: 25px 0;
+        }
+
+        .type {
+            color: #94a3b8;
+        }
+
+        .balance {
+            font-size: 25px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        .details {
+            display: inline-block;
+            margin-top: 20px;
+            text-decoration: none;
+            color: white;
+            background: #475569;
+            padding: 10px 18px;
+            border-radius: 8px;
+        }
+
+        .empty {
+            background: #1e293b;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .back {
+            display: inline-block;
+            margin-top: 30px;
+            color: #94a3b8;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="top">
+        <h1>My Cards</h1>
+        <a class="add" href="{% url 'card_create' %}">
+            + Add Card
+        </a>
+    </div>
+    {% if cards %}
+        <div class="cards">
+            {% for card in cards %}
+                <div class="card">
+                    <div class="type">
+                        {{ card.type }}
+                    </div>
+                    <div class="card-number">
+                        **  ** {{ card.card_number|slice:"-4:" }}
+                    </div>
+                    <div>Balance</div>
+                    <div class="balance">
+                        {{ card.balance }}
+                    </div>
+                    <a class="details"
+                       href="{% url 'card_detail' card.id %}">
+                        View Card
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="empty">
+            <h2>You don't have any cards yet</h2>
+            <p>Create your first card.</p>
+        </div>
+    {% endif %}
+    <a class="back" href="{% url 'account_detail' %}">← Back to Account</a>
+</div>
+</body>
+</html>

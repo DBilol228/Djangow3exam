@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Transaction History</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #0f172a;
+            color: white;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 900px;
+            margin: 50px auto;
+        }
+
+        .header {
+            background: #1e293b;
+            padding: 30px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            margin: 0 0 10px;
+        }
+
+        .header p {
+            color: #94a3b8;
+        }
+
+        .filters {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .filters a {
+            text-decoration: none;
+            color: white;
+            background: #334155;
+            padding: 12px 20px;
+            border-radius: 9px;
+        }
+
+        .filters a:hover {
+            background: #475569;
+        }
+
+        .transaction {
+            background: #1e293b;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .type {
+            font-size: 18px;
+            margin-bottom: 8px;
+        }
+
+        .date {
+            color: #94a3b8;
+        }
+
+        .amount {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .empty {
+            background: #1e293b;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .back {
+            display: inline-block;
+            margin-top: 20px;
+            text-decoration: none;
+            color: white;
+            background: #2563eb;
+            padding: 12px 20px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>Transaction History</h1>
+        <p>View your sent and received transactions</p>
+    </div>
+    <div class="filters">
+        <a href="?filter=all">All</a>
+        <a href="?filter=sent">Sent</a>
+        <a href="?filter=received">Received</a>
+    </div>
+    {% for transaction in transactions %}
+        <div class="transaction">
+            <div>
+                <div class="type">
+                    {{ transaction.source }} → {{ transaction.destination }}
+                </div>
+                <div class="date">
+                    {{ transaction.date }}
+                </div>
+            </div>
+            <div class="amount">
+                {{ transaction.amount }}
+            </div>
+        </div>
+    {% empty %}
+        <div class="empty">
+            No transactions found.
+        </div>
+    {% endfor %}
+    <a class="back" href="{% url 'account_detail' %}">← Back to Account</a>
+</div>
+</body>
+</html>

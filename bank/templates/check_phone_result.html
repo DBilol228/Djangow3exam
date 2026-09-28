@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Found</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #0f172a;
+            color: white;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 500px;
+            margin: 70px auto;
+        }
+
+        .box {
+            background: #1e293b;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 30px;
+        }
+
+        .info {
+            background: #334155;
+            padding: 18px;
+            border-radius: 10px;
+            margin-bottom: 12px;
+        }
+
+        .label {
+            color: #94a3b8;
+            font-size: 14px;
+        }
+
+        .value {
+            font-size: 19px;
+            margin-top: 5px;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            text-decoration: none;
+            color: white;
+            background: #2563eb;
+            padding: 12px 22px;
+            border-radius: 10px;
+        }
+
+        a:hover {
+            background: #1d4ed8;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="box">
+        <h1>User Found</h1>
+        <div class="info">
+            <div class="label">First Name</div>
+            <div class="value">{{ account.first_name }}</div>
+        </div>
+        <div class="info">
+            <div class="label">Last Name</div>
+            <div class="value">{{ account.last_name }}</div>
+        </div>
+        <a href="{% url 'check_phone' %}">Search Again</a>
+    </div>
+</div>
+</body>
+</html>
